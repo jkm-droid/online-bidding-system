@@ -37,8 +37,8 @@ Database Design
     Admin - username,email,phone_number, password
     Buyers/Users - full_name,email/phone_number,password
     Products - price, specs, availability
-    Bids - product_id, seller_id, bid_price
-    Sellers - full_name,email/phone_number,password,location,rating
+    Bids - product_id, buyer_id, bid_price
+    Sellers - full_name,email/phone_number,location,rating
     
     Relationships
     Products - Sellers - one-to-many

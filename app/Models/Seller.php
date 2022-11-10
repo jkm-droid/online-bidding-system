@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Seller extends Model
 {
     use HasFactory;
+
+    /**
+     * Get the products for the seller.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

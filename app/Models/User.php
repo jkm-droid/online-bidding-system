@@ -24,6 +24,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the bids for the buyer.
+     */
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
