@@ -3,12 +3,6 @@
 @section('content')
 
     <div class="auth-box col-md-3 container">
-        <div class="text-center">
-            <h3><a href="/" class="h3">
-                    Stawika Investment
-                </a>
-            </h3>
-        </div>
 
         <div class="card-body">
             @if ($message = Session::get('success'))

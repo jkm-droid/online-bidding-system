@@ -19,7 +19,7 @@ class CreateSellersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('email')->unique();
             $table->string('location');
-            $table->integer('rating');
+            $table->integer('rating')->nullable();
             $table->timestamps();
         });
     }

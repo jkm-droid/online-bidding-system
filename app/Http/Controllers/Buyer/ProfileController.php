@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Buyer;
 
 use App\Http\Controllers\Controller;
-use App\Services\MemberProfileService;
+use App\Services\BuyerProfileService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,11 +13,11 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     /**
-     * @var MemberProfileService
+     * @var BuyerProfileService
      */
     private $_memberService;
 
-    public function __construct(MemberProfileService $memberService)
+    public function __construct(BuyerProfileService $memberService)
     {
         $this->middleware('auth');
         $this->_memberService = $memberService;

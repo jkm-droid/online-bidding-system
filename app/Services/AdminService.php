@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Constants\AppConstants;
 use App\Models\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -11,15 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class AdminService
 {
-    /**
-     * @var SystemService
-     */
-    private $_systemService;
-
-    public function __construct(SystemService $systemService)
-    {
-        $this->_systemService = $systemService;
-    }
 
     /**
      * @param $request
@@ -59,13 +49,6 @@ class AdminService
         $credentials = filter_var($loginRequest['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         if(Auth::guard('admin')->attempt(array($credentials=>$loginRequest['username'], 'password'=>$loginRequest['password']))){
-
-            $logData = array(
-                'module'=>AppConstants::$modules['admin'],
-                'log'=>'<bold>'.Auth::guard('admin')->user()->username.'</bold> logged into the system successfully'
-            );
-            $this->_systemService->addSystemLogActivity($logData);
-
             return redirect()->intended(route('dashboard'))
                 ->with('success', 'logged in successfully');
         }
@@ -79,12 +62,6 @@ class AdminService
      */
     public function logoutAdmin($request)
     {
-        $logData = array(
-            'module'=>AppConstants::$modules['admin'],
-            'log'=>'<bold>'.Auth::guard('admin')->user()->username.'</bold> logged out of the system successfully'
-        );
-        $this->_systemService->addSystemLogActivity($logData);
-
         if (Auth::guard('admin')->check()){
             Auth::guard('admin')->logout();
         }else {

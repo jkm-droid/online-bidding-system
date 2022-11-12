@@ -36,7 +36,7 @@ Comparison of price, Ram and ssd/harddisk storage, colour, screen size etc
     Tables
     Admin - username,email,phone_number, password
     Buyers/Users - full_name,email/phone_number,password
-    Products - price, specs, availability
+    Products - name, price, specs, availability
     Bids - product_id, buyer_id, bid_price
     Sellers - full_name,email/phone_number,location,rating
     

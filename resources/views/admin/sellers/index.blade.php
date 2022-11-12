@@ -5,13 +5,18 @@
     <div style="--bs-breadcrumb-divider: '>';" class="d-sm-flex align-items-center justify-content-between mb-4">
         <ol class="breadcrumb bg-light mb-0 text-gray-800" >
             <li class="breadcrumb-item">
-                @if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
-                    <a href="{{ route('dashboard') }}">Dashboard</a>
-                @else
-                    <a href="{{ route('buyer.portal') }}">Dashboard</a>
-                @endif
+                <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
+            <li class="breadcrumb-item active" aria-current="page">All Members</li>
         </ol>
     </div>
+
+    @if(count($sellers) > 0)
+
+        @include('admin.partials.seller-table')
+
+    @else
+        <p class="text-center text-danger">No recent sellers were found</p>
+    @endif
 
 @endsection

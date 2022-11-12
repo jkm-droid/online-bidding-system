@@ -10,6 +10,18 @@ class Seller extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'full_name',
+        'email',
+        'phone_number',
+        'location',
+    ];
+
+    /**
      * Get the products for the seller.
      */
     public function products()

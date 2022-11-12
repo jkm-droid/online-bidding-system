@@ -2,12 +2,6 @@
 
 @section('content')
     <div class="auth-box container col-md-4">
-        <div class="text-center">
-            <h3><a href="/" class="h3">
-                    Stawika Investment
-                </a>
-            </h3>
-        </div>
 
         @if ($message = Session::get('error'))
             <p class="alert alert-danger">{{ $message }}</p>

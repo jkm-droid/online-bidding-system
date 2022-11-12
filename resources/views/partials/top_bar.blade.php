@@ -32,48 +32,7 @@
             </div>
         </li>
 
-    @if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
-        <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell fa-fw"></i>
-                    <!-- Counter - Alerts -->
-                    <span class="badge badge-danger badge-counter">
-                    {{ count(Auth::guard('admin')->user()->unreadNotifications) }}
-                </span>
-                </a>
-                <!-- Dropdown - Alerts -->
-                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                     aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">
-                        Alerts Center
-                    </h6>
-                    @if(count(Auth::guard('admin')->user()->unreadNotifications) > 0)
-                        @foreach(Auth::guard('admin')->user()->unreadNotifications as $notification)
-                            @if($loop->index <= 3)
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">
-                                            {{ \Carbon\Carbon::parse($notification['created_at'])->format('Y F d  H:m:s') }}
-                                        </div>
-                                        <span class="font-weight-bold">{{ $notification->data['title'] }}</span>
-                                    </div>
-                                </a>
-                            @endif
-                        @endforeach
-                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                    @else
-                        <div>No notifications found</div>
-                    @endif
-                </div>
-            </li>
-
+        @if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
@@ -97,10 +56,6 @@
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                         Settings
                     </a>
-                    <a class="dropdown-item" href="{{ route('system.logs') }}">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
-                    </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -108,50 +63,7 @@
                     </a>
                 </div>
             </li>
-    @else
-{{--        <!-- Nav Item - Alerts -->--}}
-{{--            @if(Auth::user()->is_profile_complete == 1)--}}
-{{--                <li class="nav-item dropdown no-arrow mx-1">--}}
-{{--                    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"--}}
-{{--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                        <i class="fas fa-bell fa-fw"></i>--}}
-{{--                        <!-- Counter - Alerts -->--}}
-{{--                        <span class="badge badge-danger badge-counter">--}}
-{{--                    {{ count(Auth::guard('web')->user()->unreadNotifications) }}--}}
-{{--                </span>--}}
-{{--                    </a>--}}
-{{--                    <!-- Dropdown - Alerts -->--}}
-{{--                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"--}}
-{{--                         aria-labelledby="alertsDropdown">--}}
-{{--                        <h6 class="dropdown-header">--}}
-{{--                            Alerts Center--}}
-{{--                        </h6>--}}
-{{--                        @if(count(Auth::guard('web')->user()->unreadNotifications) > 0)--}}
-{{--                            @foreach(Auth::guard('web')->user()->unreadNotifications as $notification)--}}
-{{--                                @if($loop->index <= 3)--}}
-{{--                                    <a class="dropdown-item d-flex align-items-center" href="#">--}}
-{{--                                        <div class="mr-3">--}}
-{{--                                            <div class="icon-circle bg-primary">--}}
-{{--                                                <i class="fas fa-file-alt text-white"></i>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div>--}}
-{{--                                            <div class="small text-gray-500">--}}
-{{--                                                {{ \Carbon\Carbon::parse($notification['created_at'])->format('Y F d  H:m:s') }}--}}
-{{--                                            </div>--}}
-{{--                                            <span class="font-weight-bold">{{ $notification->data['title'] }}</span>--}}
-{{--                                        </div>--}}
-{{--                                    </a>--}}
-{{--                                @endif--}}
-{{--                            @endforeach--}}
-{{--                            <a class="dropdown-item text-center small text-gray-500" href="{{ route('notifications') }}">Show All Alerts</a>--}}
-{{--                        @else--}}
-{{--                            <div>No notifications found</div>--}}
-{{--                        @endif--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--            @endif--}}
-
+        @else
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
@@ -167,10 +79,10 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="{{ route('buyer.profile.view') }}">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Profile
-                        </a>
+                    <a class="dropdown-item" href="{{ route('buyer.profile.view') }}">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                    </a>
 
                     <a class="dropdown-item" href="{{ route('buyer.profile.edit') }}">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
