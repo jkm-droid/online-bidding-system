@@ -1,0 +1,312 @@
+html, body{
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+    /*background-color: #272e38;*/
+}
+a{
+    text-decoration: none;
+}
+
+.underline-text a:hover{
+    text-decoration: underline;
+    color: red;
+}
+.auth-box{
+    padding-top: 10vh;
+}
+
+.auth-box .card, .auth-box .card-footer {
+    border: none;
+    background-color: #eeeaea;
+}
+
+.login-box-msg{
+    padding: 10px;
+}
+
+.img-circle{
+    border-radius: 15px;
+}
+/*different color schemes*/
+.put-black{
+    color: black;
+}
+
+.put-bold{
+    font-weight: bold;
+}
+
+.put-red{
+    color: red;
+}
+
+.put-green{
+    color: #1ac01a;
+}
+
+.read-topic a{
+    color: #c50303 !important;
+}
+
+.unread-topic a{
+    color: black !important;
+}
+/*****0A0A0AFF
+**
+**welcome page style
+**
+****/
+.categories, .topics{
+    font-size: larger;
+}
+.topics{
+    text-align: end;
+    padding-top: 0;
+    padding-left: 90px;
+}
+
+.category-topics{
+    padding-top: 10px;
+}
+
+.moments-ago-section h5{
+    font-size: medium;
+ }
+
+.latest-topic-content, .user-actions{
+    padding-left: 50px;
+}
+
+.main-content{
+    padding-top: 20px;
+}
+
+.top-options{
+    border: 2px solid darkgray;
+    font-weight: bold;
+}
+.show-on-mobile{
+    display: none;
+}
+
+.paginate-mobile{
+    display: none !important;
+}
+.profile-image-mobile{
+    width: 100% !important;
+}
+/*mobile phone welcome page styling*/
+@media only screen and (max-width: 800px) {
+    .memberPieChart{
+        height: 1000px !important;
+    }
+    #myPieChart{
+        width: 100%;
+        min-height: 500px !important;
+    }
+    #groupChart{
+        width: 100%;
+        min-height: 500px !important;
+    }
+    .change-padding h6{
+        padding-left: 50px;
+    }
+    .disappear-item{
+        display: none;
+    }
+    .message-authors{
+        display: none;
+    }
+
+    .category-topics-title{
+        font-size: medium;
+    }
+
+    .auth-box{
+        padding-top: 15vh;
+    }
+
+    .logged-user-profile{
+        display: none !important;
+    }
+
+    .topic-creation-categories{
+        display: none;
+    }
+
+    .top-topics-title{
+        text-align: center;
+    }
+
+    .profile{
+        margin-bottom: 15px !important;
+    }
+
+    .profile-section, .profile-image img{
+        text-align: center;
+    }
+
+    .profile-image .image{
+        display: inline;
+    }
+
+    .main-profile-section{
+        max-height: none;
+    }
+
+    .show-item{
+        display: block !important;
+    }
+
+    .action-buttons{
+        text-align: start !important;
+    }
+
+    .topic-text{
+        font-size: smaller;
+    }
+
+    .hide-on-mobile{
+        display: none !important;
+    }
+    .show-on-mobile{
+        display: inline !important;
+    }
+    .topics-messages{
+        margin-left: 50px !important;
+    }
+
+    .paginate-mobile{
+        display: inline !important;
+    }
+
+    .paginate-desktop{
+        display: none !important;
+    }
+
+    .profile-image-mobile{
+        max-height: 200px;
+    }
+
+    .full-width{
+        width: 100% !important;
+    }
+}
+
+/*single topic customization*/
+.topic-body{
+    font-size: large;
+    /*line-height: normal;*/
+}
+.message-padding{
+    padding-left: 70px;
+}
+
+.single-topic-table , .single-message-table{
+    padding: 0;
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+.single-topic-message{
+    border-radius: 5px;
+    border:1px solid lightgrey;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#reply-editor{
+    margin-top: 30px;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+#reply-editor .btn{
+    margin: 10px;
+    text-align: end;
+}
+#footer {
+    margin-top: 15vh;
+    border-top: 2px solid goldenrod;
+    color: black;
+    font-size: 14px;
+    background: #d3bdc1;
+    box-shadow: 0 2px 15px rgba(18, 66, 101, 0.08);
+}
+
+#footer .social-links a {
+    font-size: 18px;
+    display: inline-block;
+    background: red;
+    color: black;
+    line-height: 1;
+    padding: 8px 0;
+    margin-right: 4px;
+    border-radius: 5px;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    transition: 0.3s;
+}
+
+#footer .social-links a:hover {
+    background: yellow;
+    color: black;
+    text-decoration: none;
+}
+
+/*styling for logged users*/
+
+.logged-user-details h6{
+    font-size: small;
+}
+
+#message-error-box{
+    padding: 5px;
+    font-weight: bold;
+}
+
+/*profile section styling*/
+.m-body{
+    background-color: #c7bb79;
+}
+
+.image {
+    opacity: 1;
+    /*display: block;*/
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    max-height: 210px;
+    min-height: 200px;
+    max-width: 200px;
+    min-width: 200px;
+}
+
+.middle-profile {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 17%;
+    text-align: center;
+}
+
+.profile-image:hover .image {
+    opacity: 0.3;
+}
+
+.profile-circled-image img{
+    width: 30px;
+    height: 30px;
+}
+.profile-circled-image img{
+    border-radius: 50%;
+}
+
+.breadcrumb{
+    background-color: white;
+}
+
+#profile-settings label{
+    padding-bottom: 5px;
+    padding-top: 10px;
+}

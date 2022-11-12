@@ -32,7 +32,7 @@ A comparison of their specs is displayed to aid the bidder to aid the bidder in 
 i.e
 Comparison of price, Ram and ssd/harddisk storage, colour, screen size etc
 
-Database Design
+    Database Design
     Tables
     Admin - username,email,phone_number, password
     Buyers/Users - full_name,email/phone_number,password
