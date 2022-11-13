@@ -19,7 +19,8 @@ class Product extends Model
         'price',
         'seller_id',
         'specs',
-        'is_available'
+        'is_available',
+        'product_image'
     ];
 
     /**

@@ -22,7 +22,6 @@ class AuthService
      */
     public function createNewBuyer($request)
     {
-//        dd($request->all());
         $request->validate([
             'username'=>'required|unique:users',
             'full_name'=>'required|min:8|string',

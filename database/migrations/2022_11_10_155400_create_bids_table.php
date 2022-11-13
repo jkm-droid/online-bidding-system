@@ -19,10 +19,6 @@ class CreateBidsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->decimal('bid_price');
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            //buyers
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

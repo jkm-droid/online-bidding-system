@@ -4,9 +4,11 @@
         <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Image</th>
             <th>Price</th>
             <th>Specs</th>
             <th>Is Available</th>
+            <th>Owner</th>
             <th>Created On</th>
             <th>Action</th>
         </tr>
@@ -15,10 +17,14 @@
         @foreach($products as $product)
             <tr>
                 <td><i class="fas fa-check-square"></i></td>
-                <td>{{ $product->name }}</td>
+                <td>{{ $product->product_name }}</td>
+                <td>
+                    <img src="/product_gallery/{{$product->product_image}}" alt="" width="70" height="35">
+                </td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->specs }}</td>
                 <td>{{ $product->is_available }}</td>
+                <td>{{ $product->seller->email }}</td>
                 <td>{{ $product->created_at }}</td>
                 <td>
                     <a href="{{ route('admin.product.edit.form', $product->id) }}">Edit</a>
