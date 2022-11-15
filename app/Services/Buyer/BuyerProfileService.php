@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Buyer;
 
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;

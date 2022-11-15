@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Buyer;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

@@ -108,7 +108,7 @@
         <!-- Nav Item - Pages Collapse Menu -->
 
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('buyer.products.show') }}">
                 <i class="fas fa-fw fa-city"></i>
                 <span>Auction Center</span></a>
         </li>

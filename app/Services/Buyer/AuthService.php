@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Buyer;
 
 use App\Models\User;
 use App\Models\UserVerification;
@@ -77,6 +77,7 @@ class AuthService
         $credentials = filter_var(trim($loginRequest['username']), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         if(Auth::attempt(array($credentials=>trim($loginRequest['username']), 'password'=>trim($loginRequest['password'])))){//,'is_approved'=>1
+
             return redirect()->intended(route('buyer.portal'))
                 ->with('success', 'logged in successfully');
         }

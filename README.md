@@ -1,8 +1,8 @@
 Scope
-Its a online system that will allow buyers to bid for items being auction. 
+Its an online system that will allow buyers to bid for items being auction. 
 In the case where the same item with different features is being auction it will 
 need to compare and display the two different features for the buyer to be able 
-to make a easy and fast decision on which item to bid on
+to make an easy and fast decision on which item to bid on
 The system should fully signal the products available for auctioning
 It should store and generate report on completed bids
 Each bid should last for certain duration of time

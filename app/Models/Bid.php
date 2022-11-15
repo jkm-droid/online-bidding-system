@@ -9,6 +9,13 @@ class Bid extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'product_id',
+        'user_id' ,
+        'bid_price',
+        'bid_comment'
+    ];
+
     /**
      * Get the buyer that owns the bid.
      */

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\ProductService;
+use App\Services\Admin\ProductService;
 use Illuminate\Http\Request;
 
 class ManageProductController extends Controller

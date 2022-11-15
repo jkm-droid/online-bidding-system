@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Buyer\AuctionCenterController;
 use App\Http\Controllers\Buyer\AuthController;
 use App\Http\Controllers\Buyer\PortalController;
 use App\Http\Controllers\Buyer\ProfileController;
@@ -26,4 +27,8 @@ Route::name('buyer.')->group(function (){
     Route::get('buyer/profile', [ProfileController::class, 'showProfilePage'])->name('profile.view');
     Route::get('buyer/profile/edit', [ProfileController::class, 'showProfileEditPage'])->name('profile.edit');
     Route::put('buyer/profile/update/{id}', [ProfileController::class, 'updateBuyerProfile'])->name('profile.update');
+
+    //products
+    Route::get('buyer/products', [AuctionCenterController::class, 'showAuctionCenter'])->name('products.show');
+    Route::post('buyer/products/place-bid', [AuctionCenterController::class, 'placeProductBid'])->name('products.place.bid');
 });

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\SellerService;
+use App\Services\Admin\SellerService;
 use Illuminate\Http\Request;
 
 class ManageSellerController extends Controller
