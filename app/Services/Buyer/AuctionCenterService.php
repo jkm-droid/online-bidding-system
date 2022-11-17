@@ -5,17 +5,25 @@ namespace App\Services\Buyer;
 use App\Models\Bid;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class AuctionCenterService
 {
     public function showAuctionCenterAndProducts()
     {
-        $products = Product::where('is_available',1)
-            ->orderBy('created_at','desc')
-            ->paginate(15);
+        $similarProducts = Product::whereIn('product_name', function ( $query ) {
+            $query->select('product_name')->from('products')->groupBy('product_name')->havingRaw('count(*) > 1');
+        })->get();
 
-        return view('buyer.auction_center.index',compact('products'));
+        $product_name = '';
+        foreach($similarProducts as $similarProduct){
+           $product_name = $similarProduct->product_name;
+        }
+
+        $products = Product::where('product_name','!=',$product_name)->paginate(10);
+
+        return view('buyer.auction_center.index',compact('products','similarProducts'));
     }
 
     public function savePlacedBid($bidRequest)

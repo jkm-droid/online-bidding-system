@@ -9,7 +9,7 @@
             <th>Specs</th>
             <th>Is Available</th>
             <th>Owner</th>
-            <th>Created On</th>
+            <th>Bids</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -23,9 +23,15 @@
                 </td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->specs }}</td>
-                <td>{{ $product->is_available }}</td>
+                <td class="text-center">
+                    @if($product->is_available)
+                        <i class="fa fa-check-circle text-success"></i>
+                    @else
+                        <i class="fa fa-times-circle text-danger"></i>
+                    @endif
+                </td>
                 <td>{{ $product->seller->email }}</td>
-                <td>{{ $product->created_at }}</td>
+                <td>{{ $product->bids->count() }}</td>
                 <td>
                     <a href="{{ route('admin.product.edit.form', $product->id) }}">Edit</a>
                 </td>
