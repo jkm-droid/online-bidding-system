@@ -20,7 +20,9 @@ class Product extends Model
         'seller_id',
         'specs',
         'is_available',
-        'product_image'
+        'product_image',
+        'has_bid',
+        'is_closed'
     ];
 
     /**

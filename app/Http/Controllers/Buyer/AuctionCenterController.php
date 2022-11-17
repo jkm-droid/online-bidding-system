@@ -29,6 +29,7 @@ class AuctionCenterController extends Controller
      */
     public function showAuctionCenter()
     {
+//        return $this->_biddingService->checkIfProductHasBids();
         return $this->_biddingService->checkBiddingStatus();
 //        return $this->_auctionCenterService->showAuctionCenterAndProducts();
     }
