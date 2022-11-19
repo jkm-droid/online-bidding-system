@@ -34,6 +34,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the bids for the buyer.
+     */
+    public function products()
+    {
+        //,'user_id','bid_id','id','id'
+        return $this->hasManyThrough(Product::class,Bid::class);
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>

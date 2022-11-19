@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddExpiresAtFieldToBidsTable extends Migration
+class AddExpiresAtToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddExpiresAtFieldToBidsTable extends Migration
      */
     public function up()
     {
-        Schema::table('bids', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->dateTime('expires_at')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddExpiresAtFieldToBidsTable extends Migration
      */
     public function down()
     {
-        Schema::table('bids', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('expires_at');
         });
     }

@@ -32,4 +32,5 @@ Route::name('buyer.')->group(function (){
     Route::get('buyer/products', [AuctionCenterController::class, 'showAuctionCenter'])->name('products.show');
     Route::post('buyer/products/place-bid', [AuctionCenterController::class, 'placeProductBid'])->name('products.place.bid');
     Route::get('buyer/bids', [AuctionCenterController::class, 'getBuyersBids'])->name('bids.show');
+    Route::get('buyer/bid-products', [AuctionCenterController::class, 'getBuyersBidProducts'])->name('bid.products.show');
 });

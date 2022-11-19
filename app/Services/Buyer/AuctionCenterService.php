@@ -38,7 +38,7 @@ class AuctionCenterService
         }
 
         //get the similar products
-        $similarProducts = $similarProducts->where('product_name',$similar_name);
+        $similarProducts = Product::where('product_name',$similar_name)->paginate(3);
 
         $products = Product::where('product_name','!=',$similar_name)->paginate(10);
 
@@ -79,7 +79,20 @@ class AuctionCenterService
 
     public function getBuyerBids()
     {
-        $bids = Bid::where('user_id',Auth::user()->getAuthIdentifier())->paginate(15);
+        $bids = $this->getBids();
+
         return view('buyer.bids.index', compact('bids'));
+    }
+
+    public function getBuyerBidProducts()
+    {
+        $buyer_bid_products = $this->getBids();
+
+        return view('buyer.products.index', compact('buyer_bid_products'));
+    }
+
+    private function getBids()
+    {
+        return Bid::where('user_id',Auth::user()->getAuthIdentifier())->paginate(15);
     }
 }

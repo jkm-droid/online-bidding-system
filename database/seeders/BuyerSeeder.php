@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ class BuyerSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
         $faker = Faker::create('App\Buyer');
         for ($i = 1; $i <=1000;$i++)
         {

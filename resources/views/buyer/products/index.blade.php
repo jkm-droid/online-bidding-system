@@ -12,16 +12,16 @@
                 @endif
             </li>
             <li class="breadcrumb-item" aria-current="page">Products Center</li>
-            <li class="breadcrumb-item active" aria-current="page">My Bids</li>
+            <li class="breadcrumb-item active" aria-current="page">My Bid Products</li>
         </ol>
     </div>
 
-    @if(count($bids) > 0)
+    @if(count($buyer_bid_products) > 0)
 
-        @include('buyer.products.partials.products-table')
+        @include('buyer.products.partials.bid-products-table')
 
     @else
-        <p class="text-center text-danger">No recent bids were found</p>
+        <p class="text-center text-danger">No recent bid products were found</p>
     @endif
 
 @endsection

@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('product:status')->everyMinute();
-         $schedule->command('bidding:status')->everyTwoMinutes();
+        $schedule->command('bidding:status')->everyMinute();
+        $schedule->command('product:status')->everyTwoMinutes();
     }
 
     /**

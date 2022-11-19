@@ -7,7 +7,6 @@ use App\Helpers\ServiceHelpers;
 use App\Models\Bid;
 use App\Models\Product;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
 
 class CheckBiddingStatusService
 {
@@ -17,9 +16,7 @@ class CheckBiddingStatusService
      */
     public function checkBiddingStatus()
     {
-        $file = fopen(Storage::disk('local')->path('check_bidding_status.log'), 'a+');
-        fwrite($file,'Started checking bid status at '.Carbon::now()."\n");
-        fclose($file);
+        ServiceHelpers::add_to_file('[BID_STATUS]Started checking bid status at '.Carbon::now());
 
         //get only the bidded products' ids
         $product_with_bids = Product::where('has_bid',1)->get();
@@ -28,8 +25,12 @@ class CheckBiddingStatusService
         foreach ($product_with_bids as $product_with_bid)
         {
             $product_time_diff = ServiceHelpers::timeDifference($product_with_bid->created_at);
-            $remaining_time = (AppConstants::$product_expiration * 60) - ($product_time_diff * 60);
-            if ($product_time_diff < AppConstants::$product_expiration && $remaining_time <= 10)
+            $remaining_time = AppConstants::$product_duration - $product_time_diff;
+
+            $exp_time = AppConstants::$product_duration;
+            $check = $product_time_diff <= $exp_time && $product_time_diff > 0;
+
+            if ($check == true && $remaining_time <= 20)
             {
                 if ($product_with_bid->bids->count() > 1)
                 {
@@ -49,7 +50,7 @@ class CheckBiddingStatusService
                         $product_with_bid);
                 }
             }
-            else
+            elseif($product_time_diff > $exp_time)
             {
                 ServiceHelpers::closedTheProductForBidding($product_with_bid->id);
             }
@@ -76,7 +77,7 @@ class CheckBiddingStatusService
         {
             $details = [];
             $time_diff = ServiceHelpers::timeDifference($multiple_bid->created_at);
-            if ($time_diff < AppConstants::$bid_expiration) {
+            if ($time_diff < AppConstants::$bid_duration) {
                 $details['id'] = $multiple_bid->id;
                 $details['bid_price'] = $multiple_bid->bid_price;
                 array_push($multiple_price_array, $details);
@@ -100,13 +101,11 @@ class CheckBiddingStatusService
     {
         $bid_price = 0;
         $time_diff = ServiceHelpers::timeDifference($single_bid->created_at);
-        if ($time_diff < AppConstants::$bid_expiration)
+        if ($time_diff < AppConstants::$bid_duration)
         {
             $bid_price = $single_bid->bid_price;
         }
 
         return $bid_price;
     }
-
-
 }

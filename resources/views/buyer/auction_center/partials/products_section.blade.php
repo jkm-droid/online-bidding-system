@@ -1,11 +1,11 @@
 <div class="mt-3">
     @if(count($similarProducts) > 0)
-        <h4 class="mt-4">Similar Products</h4>
+        <h4 class="mt-4 text-danger">Similar Products</h4>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach($similarProducts as $product)
 {{--                <div class="col">--}}
-                    <div class="card h-100">
+                    <div class="card h-100 border-danger">
                         <img src="/product_gallery/{{ $product->product_image }}" style="min-height: 400px;max-height: 400px" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">
@@ -45,6 +45,9 @@
             @endforeach
         </div>
     @endif
+        <div class="d-flex justify-content-center paginate-mobile">
+            {{ $similarProducts->links('pagination.custom_pagination') }}
+        </div>
 </div>
 
 <div class="mt-3">

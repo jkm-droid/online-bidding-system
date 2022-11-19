@@ -14,7 +14,6 @@ class AddHasExpiredFieldToBidsTable extends Migration
     public function up()
     {
         Schema::table('bids', function (Blueprint $table) {
-            $table->dropColumn('expires_at');
             $table->boolean('has_expired')->default(0);
             $table->dateTime('expired_at')->nullable();
         });

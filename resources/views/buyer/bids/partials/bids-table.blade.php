@@ -43,3 +43,7 @@
         </tbody>
     </table>
 </div>
+
+<div class="d-flex justify-content-center paginate-mobile">
+    {{ $bids->links('pagination.custom_pagination') }}
+</div>
