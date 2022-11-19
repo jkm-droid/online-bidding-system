@@ -30,7 +30,7 @@ class CheckBiddingStatusService
             $exp_time = AppConstants::$product_duration;
             $check = $product_time_diff <= $exp_time && $product_time_diff > 0;
 
-            if ($check == true && $remaining_time <= 20)
+            if ($check == true && $remaining_time <= 10)
             {
                 if ($product_with_bid->bids->count() > 1)
                 {
@@ -63,11 +63,11 @@ class CheckBiddingStatusService
         {
             Bid::where('id',$bid_id)->update([
                 'is_success' => 1,
-                'bidded_at' => Carbon::now()
+                'bidded_at' => Carbon::now(AppConstants::$time_zone)
             ]);
-        }
 
-        ServiceHelpers::closedTheProductForBidding($product->id);
+            ServiceHelpers::closedTheProductForBidding($product->id);
+        }
     }
 
     private function getBidPricesForProductWithManyBids($multiple_bids)
@@ -76,12 +76,12 @@ class CheckBiddingStatusService
         foreach ($multiple_bids as $multiple_bid)
         {
             $details = [];
-            $time_diff = ServiceHelpers::timeDifference($multiple_bid->created_at);
-            if ($time_diff < AppConstants::$bid_duration) {
+//            $time_diff = ServiceHelpers::timeDifference($multiple_bid->created_at);
+//            if ($time_diff < AppConstants::$bid_duration) {
                 $details['id'] = $multiple_bid->id;
                 $details['bid_price'] = $multiple_bid->bid_price;
                 array_push($multiple_price_array, $details);
-            }
+//            }
         }
 
         $bid_prices = array_column($multiple_price_array,'bid_price');
@@ -100,11 +100,11 @@ class CheckBiddingStatusService
     private function getBidPriceForProductWithSingleBid($single_bid)
     {
         $bid_price = 0;
-        $time_diff = ServiceHelpers::timeDifference($single_bid->created_at);
-        if ($time_diff < AppConstants::$bid_duration)
-        {
+//        $time_diff = ServiceHelpers::timeDifference($single_bid->created_at);
+//        if ($time_diff < AppConstants::$bid_duration)
+//        {
             $bid_price = $single_bid->bid_price;
-        }
+//        }
 
         return $bid_price;
     }

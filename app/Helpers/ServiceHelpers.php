@@ -3,9 +3,9 @@
 namespace App\Helpers;
 
 use App\Constants\AppConstants;
+use App\Models\Bid;
 use App\Models\Product;
 use Carbon\Carbon;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Storage;
 
 class ServiceHelpers
@@ -18,6 +18,18 @@ class ServiceHelpers
 
         $data = "Closed the product with Id: ".$product->id.' at '.$product->updated_at;
         self::add_to_file($data);
+
+        foreach ($product->bids as $bid)
+        {
+            $expired_at = Carbon::now(AppConstants::$time_zone)->format(AppConstants::$time_format);
+            Bid::where('id',$bid->id)->where('product_id',$product_id)->update([
+                'has_expired' => 1,
+                'expired_at' => $expired_at
+            ]);
+
+            $data = "Closed the bid with Id: ".$bid->id.' at '.$expired_at;
+            self::add_to_file($data);
+        }
     }
 
     public static function timeDifference($create_time)

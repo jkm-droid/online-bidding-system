@@ -2,12 +2,13 @@
 
 namespace App\Services\Admin;
 
+use App\Constants\AppConstants;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class SellerService
+class ManageSellersService
 {
     public function createNewSeller($request)
     {
@@ -31,7 +32,7 @@ class SellerService
 
     public function getSellers()
     {
-        $sellers = Seller::all();
+        $sellers = Seller::paginate(AppConstants::$pagination);
 
         return view('admin.sellers.index', compact('sellers'));
     }

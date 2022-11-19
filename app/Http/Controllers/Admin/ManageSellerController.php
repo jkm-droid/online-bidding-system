@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\Admin\SellerService;
+use App\Services\Admin\ManageSellersService;
 use Illuminate\Http\Request;
 
 class ManageSellerController extends Controller
 {
     /**
-     * @var SellerService
+     * @var ManageSellersService
      */
     private $sellerService;
 
-    public function __construct(SellerService $sellerService)
+    public function __construct(ManageSellersService $sellerService)
     {
+        $this->middleware('auth:admin');
         $this->sellerService = $sellerService;
     }
 

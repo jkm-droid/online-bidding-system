@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Constants\AppConstants;
 use App\Models\User;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,7 +30,8 @@ class BuyerSeeder extends Seeder
                 'full_name' => $faker->firstName().' '.$faker->lastName(),
                 'phone_number' => $faker->phoneNumber(),
                 'email' => $faker->email(),
-                'password' => Hash::make("jkmq1234")
+                'password' => Hash::make("jkmq1234"),
+                'created_at'=> Carbon::now(AppConstants::$time_zone)->format(AppConstants::$time_format)
             ]);
         }
     }

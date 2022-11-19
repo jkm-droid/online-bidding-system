@@ -2,15 +2,12 @@
 
 namespace App\Services\Admin;
 
+use App\Constants\AppConstants;
 use App\Models\Product;
 use App\Models\Seller;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
 
-class ProductService
+class ManageProductsService
 {
     public function showCreateProductForm()
     {
@@ -18,6 +15,7 @@ class ProductService
 
         return view('admin.products.create', compact('sellers'));
     }
+
     public function createNewproduct($request)
     {
         $request->validate([
@@ -45,7 +43,8 @@ class ProductService
             'price' => $request['price'],
             'specs' => implode(',',$productInfo['feature_name']),
             'is_available' => true,
-            'product_image' => $imageName
+            'product_image' => $imageName,
+            'created_at'=>Carbon::now(AppConstants::$time_zone)->format(AppConstants::$time_format)
         ]);
 
         return redirect()->route('admin.product')
@@ -54,7 +53,7 @@ class ProductService
 
     public function getproducts()
     {
-        $products = product::all();
+        $products = product::paginate(AppConstants::$pagination);
 
         return view('admin.products.index', compact('products'));
     }

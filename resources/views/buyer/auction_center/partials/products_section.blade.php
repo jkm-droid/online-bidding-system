@@ -56,7 +56,7 @@
 
         <div class="row row-cols-1 row-cols-md-4 g-4">
             @foreach($products as $product)
-                <div class="col">
+                <div class="col mt-4">
                     <div class="card h-100">
                         <img src="/product_gallery/{{ $product->product_image }}" style="min-height: 400px;max-height: 400px" class="card-img-top" alt="...">
                         <div class="card-body">

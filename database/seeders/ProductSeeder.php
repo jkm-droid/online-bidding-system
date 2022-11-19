@@ -41,7 +41,7 @@ class ProductSeeder extends Seeder
                 'laptop_10.jpeg'
             ]);
             $seller_id = Seller::pluck('id')->random();
-            $creat_time = Carbon::now(AppConstants::$time_zone)->format('Y-m-d H:i:s');
+            $creat_time = Carbon::now(AppConstants::$time_zone)->format(AppConstants::$time_format);
             DB::table('products')->insert([
                 'product_name' => $faker->word(),
                 'seller_id' => $seller_id,

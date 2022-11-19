@@ -1,47 +1,50 @@
+<h5>Bids</h5>
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Specs</th>
-            <th>Is Available</th>
-            <th>Is Closed</th>
-            <th>Owner</th>
-            <th>Bids</th>
+            <th>Product Name</th>
+            <th>Bidder</th>
+            <th>Product Price</th>
+            <th>Bid Price</th>
+            <th>Bid Time</th>
+            <th>Has Expired</th>
+            <th>Expired At</th>
+            <th>Is Success</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($products as $product)
+        @foreach($bids as $bid)
             <tr>
                 <td><i class="fas fa-check-square"></i></td>
-                <td>{{ $product->product_name }}</td>
+                <td>{{ $bid->product->product_name }}</td>
                 <td>
-                    <img src="/product_gallery/{{$product->product_image}}" alt="" width="70" height="35">
+                    @if($bid->user)
+                        {{ $bid->user->full_name }}
+                    @endif
                 </td>
-                <td>{{ $product->price }}</td>
-                <td>{{ $product->specs }}</td>
+                <td>{{ $bid->product->price }}</td>
+                <td>{{ $bid->bid_price }}</td>
+                <td>{{ $bid->created_at }}</td>
                 <td class="text-center">
-                    @if($product->is_available)
+                    @if($bid->has_expired)
                         <i class="fa fa-check-circle text-success"></i>
                     @else
                         <i class="fa fa-times-circle text-danger"></i>
                     @endif
                 </td>
+                <td>{{ $bid->expired_at }}</td>
                 <td class="text-center">
-                    @if($product->is_closed)
+                    @if($bid->is_success)
                         <i class="fa fa-check-circle text-success"></i>
                     @else
                         <i class="fa fa-times-circle text-danger"></i>
                     @endif
                 </td>
-                <td>{{ $product->seller->email }}</td>
-                <td>{{ $product->bids->count() }}</td>
                 <td>
-                    <a href="{{ route('admin.product.edit.form', $product->id) }}">Edit</a>
+                    <a href="">Delete</a>
                 </td>
             </tr>
         @endforeach
@@ -50,5 +53,5 @@
 </div>
 
 <div class="d-flex justify-content-center paginate-mobile">
-    {{ $products->links('pagination.custom_pagination') }}
+    {{ $bids->links('pagination.custom_pagination') }}
 </div>

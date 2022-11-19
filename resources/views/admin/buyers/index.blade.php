@@ -11,12 +11,12 @@
         </ol>
     </div>
 
-    @if(count($members) > 0)
+    @if(count($buyers) > 0)
 
-        @include('admin.partials.seller-table')
+        @include('admin.buyers.partials.buyers-table')
 
     @else
-        <p class="text-center text-danger">No recent registered members were found</p>
+        <p class="text-center text-danger">No recent registered buyers were found</p>
     @endif
 
 @endsection

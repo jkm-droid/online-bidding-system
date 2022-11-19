@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Constants\AppConstants;
 use App\Models\Seller;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class SellerSeeder extends Seeder
@@ -25,7 +27,8 @@ class SellerSeeder extends Seeder
                 'phone_number' => $faker->phoneNumber(),
                 'email' => $faker->email(),
                 'location' => $faker->city(),
-                'rating' => $faker->numberBetween(20,1000)
+                'rating' => $faker->numberBetween(20,1000),
+                'created_at'=> Carbon::now(AppConstants::$time_zone)->format(AppConstants::$time_format)
             ]);
         }
     }

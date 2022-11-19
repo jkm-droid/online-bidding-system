@@ -33,7 +33,7 @@ class BidSeeder extends Seeder
                 'bid_price' => $faker->numberBetween(10000,100000),
                 'bid_comment' => $faker->word(),
                 'created_at' => Carbon::now(AppConstants::$time_zone),
-                'expires_at' => Product::where('id',$product_id)->pluck('expires_at')
+                'expires_at' => Product::where('id',$product_id)->pluck('expires_at')[0]
             ]);
         }
     }

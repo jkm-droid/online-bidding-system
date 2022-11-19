@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\Admin\ProductService;
+use App\Services\Admin\ManageProductsService;
 use Illuminate\Http\Request;
 
 class ManageProductController extends Controller
 {
     /**
-     * @var productService
+     * @var ManageProductsService
      */
     private $productService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ManageProductsService $productService)
     {
+        $this->middleware('auth:admin');
         $this->productService = $productService;
     }
 

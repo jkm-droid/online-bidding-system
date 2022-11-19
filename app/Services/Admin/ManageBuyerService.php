@@ -17,21 +17,26 @@ class ManageBuyerService
 {
     public function getRegisteredBuyers()
     {
-        $buyers = User::orderBy('created_at','desc')->get();
+        $buyers = User::orderBy('created_at','desc')
+            ->paginate(AppConstants::$pagination);
 
         return view('admin.buyers.index', compact('buyers'));
     }
 
     public function getApprovedBuyers()
     {
-        $buyers = User::where('is_approved',1)->orderBy('created_at','desc')->get();
+        $buyers = User::where('is_approved',1)
+            ->orderBy('created_at','desc')
+            ->paginate(AppConstants::$pagination);
 
         return view('admin.buyers.approved', compact('buyers'));
     }
 
     public function getPendingbuyers()
     {
-        $buyers = User::where('is_approved',0)->orderBy('created_at','desc')->get();
+        $buyers = User::where('is_approved',0)
+            ->orderBy('created_at','desc')
+            ->paginate(AppConstants::$pagination);
 
         return view('admin.buyers.pending', compact('buyers'));
     }

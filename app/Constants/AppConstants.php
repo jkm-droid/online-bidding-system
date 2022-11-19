@@ -7,8 +7,8 @@ use Carbon\Carbon;
 class AppConstants
 {
     public static $pagination = 10;
-    public static $product_duration = 50;
-    public static $bid_duration = 50;
+    public static $product_duration = 15;
+    public static $bid_duration = 30;
     public static $time_format = 'Y-m-d H:i:s';
     public static $time_zone = 'Africa/Nairobi';
     public static $buyerStatus = array(

@@ -2,6 +2,7 @@
 
 namespace App\Services\Buyer;
 
+use App\Constants\AppConstants;
 use App\Models\Bid;
 use App\Models\Product;
 use Illuminate\Support\Carbon;
@@ -13,8 +14,6 @@ class AuctionCenterService
 {
     public function showAuctionCenterAndProducts()
     {
-        $similarProducts = Product::all();
-
         $duplicates = DB::table('products')
             ->select('product_name', (DB::raw('COUNT(product_name) as product_count')))
             ->groupBy('product_name')
@@ -38,9 +37,13 @@ class AuctionCenterService
         }
 
         //get the similar products
-        $similarProducts = Product::where('product_name',$similar_name)->paginate(3);
+        $similarProducts = Product::where('product_name',$similar_name)
+            ->where('is_closed',0)
+            ->paginate(3);
 
-        $products = Product::where('product_name','!=',$similar_name)->paginate(10);
+        $products = Product::where('product_name','!=',$similar_name)
+            ->where('is_closed',0)
+            ->paginate(AppConstants::$pagination);
 
         return view('buyer.auction_center.index',compact('products','similarProducts'));
     }
@@ -71,7 +74,8 @@ class AuctionCenterService
             'product_id' => $bidInfo['product_id'],
             'user_id' => Auth::user()->getAuthIdentifier(),
             'bid_price' => $bidInfo['bid_price'],
-            'bid_comment' => $bidInfo['bid_comment']
+            'bid_comment' => $bidInfo['bid_comment'],
+            'created_at'=> Carbon::now(AppConstants::$time_zone)->format(AppConstants::$time_format)
         ]);
 
         return Redirect::back()->with('success', "Bid placed successfully");
@@ -93,6 +97,7 @@ class AuctionCenterService
 
     private function getBids()
     {
-        return Bid::where('user_id',Auth::user()->getAuthIdentifier())->paginate(15);
+        return Bid::where('user_id',Auth::user()->getAuthIdentifier())
+            ->paginate(AppConstants::$pagination);
     }
 }
