@@ -13,16 +13,34 @@ class AuctionCenterService
 {
     public function showAuctionCenterAndProducts()
     {
-        $similarProducts = Product::whereIn('product_name', function ( $query ) {
-            $query->select('product_name')->from('products')->groupBy('product_name')->havingRaw('count(*) > 1');
-        })->get();
+        $similarProducts = Product::all();
 
-        $product_name = '';
-        foreach($similarProducts as $similarProduct){
-           $product_name = $similarProduct->product_name;
+        $duplicates = DB::table('products')
+            ->select('product_name', (DB::raw('COUNT(product_name) as product_count')))
+            ->groupBy('product_name')
+            ->having(DB::raw('COUNT(product_name)'), '>', 1)
+            ->get();
+
+        $similar_name = '';
+        $dup_count = [];
+        //add the count to an array
+        foreach ($duplicates as $duplicate)
+        {
+            array_push($dup_count,$duplicate->product_count);
+        }
+        //choose the product_name to use
+        foreach ($duplicates as $duplicate)
+        {
+            $random_key = array_rand($dup_count,1);
+            if($duplicate->product_count == $dup_count[$random_key]){
+                $similar_name = $duplicate->product_name;
+            }
         }
 
-        $products = Product::where('product_name','!=',$product_name)->paginate(10);
+        //get the similar products
+        $similarProducts = $similarProducts->where('product_name',$similar_name);
+
+        $products = Product::where('product_name','!=',$similar_name)->paginate(10);
 
         return view('buyer.auction_center.index',compact('products','similarProducts'));
     }
@@ -53,10 +71,15 @@ class AuctionCenterService
             'product_id' => $bidInfo['product_id'],
             'user_id' => Auth::user()->getAuthIdentifier(),
             'bid_price' => $bidInfo['bid_price'],
-            'bid_comment' => $bidInfo['bid_comment'],
-            'expires_at' => Carbon::now()->addHours(24)
+            'bid_comment' => $bidInfo['bid_comment']
         ]);
 
         return Redirect::back()->with('success', "Bid placed successfully");
+    }
+
+    public function getBuyerBids()
+    {
+        $bids = Bid::where('user_id',Auth::user()->getAuthIdentifier())->paginate(15);
+        return view('buyer.bids.index', compact('bids'));
     }
 }

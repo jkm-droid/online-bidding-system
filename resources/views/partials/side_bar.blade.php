@@ -117,13 +117,13 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MyContributions"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-coins"></i>
-                <span>My Bids</span>
+                <span>Product Center</span>
             </a>
             <div id="MyContributions" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Action</h6>
-                    {{--                        <a class="collapse-item" href="{{ route('buyer.contribution.add') }}">Active</a>--}}
-                    {{--                        <a class="collapse-item" href="{{ route('contributions.approved') }}">Approved</a>--}}
+                    <a class="collapse-item" href="{{ route('buyer.bids.show') }}">Active Bids</a>
+                    <a class="collapse-item" href="{{ route('buyer.products.bidded') }}">Active Products</a>
                     {{--                        <a class="collapse-item" href="{{ route('buyer.contribution.mine') }}">View All</a>--}}
                 </div>
             </div>

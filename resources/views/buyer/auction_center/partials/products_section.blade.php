@@ -1,17 +1,21 @@
 <div class="mt-3">
-    <h4 class="mt-4">Similar Products</h4>
     @if(count($similarProducts) > 0)
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+        <h4 class="mt-4">Similar Products</h4>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach($similarProducts as $product)
-                <div class="col">
+{{--                <div class="col">--}}
                     <div class="card h-100">
                         <img src="/product_gallery/{{ $product->product_image }}" style="min-height: 400px;max-height: 400px" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ $product->product_name }}
+                                @if($product->is_closed == 1)
+                                    <span class="badge badge-danger"><small class="font-weight-bold">closed</small></span>
+                                @endif
                             </h5>
                             <h5 class="card-title badge badge-success">
-                                {{ $product->price }}
+                                {{ number_format($product->price,2)  }}
                             </h5>
                             <h5 class="card-title badge badge-dark">
                                 {{ $product->bids->count() }} bids
@@ -28,27 +32,25 @@
                             </div>
                         </div>
 
-                        <div class="card-footer text-center">
-                            <a href="#" data-toggle="modal" data-target="#bidModal{{$product->id}}" class="btn btn-primary">Place Bid</a>
+                        @if($product->is_closed == 0)
+                            <div class="card-footer text-center">
+                                <a href="#" data-toggle="modal" data-target="#bidModal{{$product->id}}" class="btn btn-primary">Place Bid</a>
 
-                            @include('buyer.auction_center.partials.bidding-modal')
-
-                            <a class="btn btn-success">
-                                View More Product & Seller details
-                            </a>
-                        </div>
+                                @include('buyer.auction_center.partials.bidding-modal')
+                            </div>
+                        @endif
 
                     </div>
-                </div>
-
+{{--                </div>--}}
             @endforeach
         </div>
     @endif
 </div>
 
 <div class="mt-3">
-    <h4 class="mt-4">Products</h4>
     @if(count($products) > 0)
+        <h4 class="mt-4">Products</h4>
+
         <div class="row row-cols-1 row-cols-md-4 g-4">
             @foreach($products as $product)
                 <div class="col">
@@ -57,9 +59,12 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ $product->product_name }}
+                                @if($product->is_closed == 1)
+                                    <span class="badge badge-danger"><small class="font-weight-bold">closed</small></span>
+                                @endif
                             </h5>
                             <h5 class="card-title badge badge-success">
-                                {{ $product->price }}
+                                {{ number_format($product->price,2) }}
                             </h5>
                             <h5 class="card-title badge badge-dark">
                                 {{ $product->bids->count() }} bids
@@ -76,15 +81,13 @@
                             </div>
                         </div>
 
-                        <div class="card-footer text-center">
-                            <a href="#" data-toggle="modal" data-target="#bidModal{{$product->id}}" class="btn btn-primary">Place Bid</a>
+                        @if($product->is_closed == 0)
+                            <div class="card-footer text-center">
+                                <a href="#" data-toggle="modal" data-target="#bidModal{{$product->id}}" class="btn btn-primary">Place Bid</a>
 
-                            @include('buyer.auction_center.partials.bidding-modal')
-
-                            <a class="btn btn-success">
-                                View More Product & Seller details
-                            </a>
-                        </div>
+                                @include('buyer.auction_center.partials.bidding-modal')
+                            </div>
+                        @endif
 
                     </div>
                 </div>
@@ -92,7 +95,7 @@
             @endforeach
         </div>
     @else
-        <p class="alert alert-danger">Oops! No products were found</p>
+        <p class="alert alert-danger text-center">Oops! No products were found</p>
     @endif
 </div>
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Buyer;
 
 use App\Http\Controllers\Controller;
 use App\Services\Buyer\AuctionCenterService;
-use App\Services\Buyer\BiddingService;
+use App\Services\Buyer\CheckBiddingStatusService;
 use Illuminate\Http\Request;
 
 class AuctionCenterController extends Controller
@@ -13,15 +13,11 @@ class AuctionCenterController extends Controller
      * @var AuctionCenterService
      */
     private $_auctionCenterService;
-    /**
-     * @var BiddingService
-     */
-    private $_biddingService;
 
-    public function __construct(AuctionCenterService $auctionCenterService, BiddingService $biddingService)
+    public function __construct(AuctionCenterService $auctionCenterService)
     {
+        $this->middleware('auth');
         $this->_auctionCenterService = $auctionCenterService;
-        $this->_biddingService = $biddingService;
     }
 
     /**
@@ -29,9 +25,7 @@ class AuctionCenterController extends Controller
      */
     public function showAuctionCenter()
     {
-//        return $this->_biddingService->checkIfProductHasBids();
-        return $this->_biddingService->checkBiddingStatus();
-//        return $this->_auctionCenterService->showAuctionCenterAndProducts();
+        return $this->_auctionCenterService->showAuctionCenterAndProducts();
     }
 
     /**
@@ -42,5 +36,15 @@ class AuctionCenterController extends Controller
     public function placeProductBid(Request $request)
     {
         return $this->_auctionCenterService->savePlacedBid($request);
+    }
+
+    /***
+     * Get all bids belonging to a buyer
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function getBuyersBids()
+    {
+        return $this->_auctionCenterService->getBuyerBids();
     }
 }

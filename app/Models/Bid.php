@@ -14,7 +14,8 @@ class Bid extends Model
         'user_id' ,
         'bid_price',
         'bid_comment',
-        'expires_at',
+        'has_expired',
+        'expired_at',
         'is_success',
         'bidded_at'
     ];
