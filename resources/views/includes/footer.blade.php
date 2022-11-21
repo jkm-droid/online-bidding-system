@@ -3,7 +3,7 @@
 
         <div class="me-md-auto text-center text-md-start">
             <div class="copyright">
-                &copy; Copyright <strong style="color: white;"><span>forum</span></strong>. All Rights Reserved
+                &copy; Copyright <strong style="color: white;"><span>Bidding System</span></strong>. All Rights Reserved
             </div>
         </div>
     </div>

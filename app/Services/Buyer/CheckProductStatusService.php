@@ -23,25 +23,26 @@ class CheckProductStatusService
 
         //get all the products
         $products = Product::all('id','created_at','has_bid','is_closed','price');
-        foreach ($products as $product)
-        {
-            $time_diff = ServiceHelpers::timeDifference($product->created_at);
-            $duration = AppConstants::$product_duration;
-
-            //In the case where the set amount is not reached,
-            //the bidding is considered as unsuccessful(closed)
-            $remaining_time = $duration - $time_diff;
-            if ($time_diff > $duration){
-                $this->checkIfProductBidPriceIsReached($product);
-            }
-
-            //In case where no one bid the bidding is
-            // considered as unsuccessful(closed)
-            if ($product->has_bid == 0 && $time_diff > $duration)
+        if ($products){
+            foreach ($products as $product)
             {
-                ServiceHelpers::closedTheProductForBidding($product->id);
-            }
+                $time_diff = ServiceHelpers::timeDifference($product->created_at);
+                $duration = AppConstants::$product_duration;
 
+                //In the case where the set amount is not reached,
+                //the bidding is considered as unsuccessful(closed)
+                $remaining_time = $duration - $time_diff;
+                if ($time_diff > $duration){
+                    $this->checkIfProductBidPriceIsReached($product);
+                }
+
+                //In case where no one bid the bidding is
+                // considered as unsuccessful(closed)
+                if ($product->has_bid == 0 && $time_diff > $duration)
+                {
+                    ServiceHelpers::closedTheProductForBidding($product->id);
+                }
+            }
         }
     }
 
