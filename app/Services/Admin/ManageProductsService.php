@@ -53,7 +53,7 @@ class ManageProductsService
 
     public function getproducts()
     {
-        $products = product::paginate(AppConstants::$pagination);
+        $products = Product::paginate(AppConstants::$pagination);
 
         return view('admin.products.index', compact('products'));
     }
